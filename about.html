@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogwarts School of Witchcraft and Wizardry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #fff;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 2px solid #d4af37;
+        }
+
+        .main-title {
+            font-size: 56px;
+            color: #d4af37;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .castle-icon {
+            font-size: 80px;
+            margin: 20px 0;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            color: #ffd700;
+            font-style: italic;
+        }
+
+        /* Hogwarts Information Section */
+        .info-section {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 60px;
+            border-left: 5px solid #d4af37;
+        }
+
+        .section-title {
+            font-size: 38px;
+            color: #d4af37;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .info-text {
+            font-size: 20px;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .info-highlight {
+            background: rgba(212, 175, 55, 0.15);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #d4af37;
+        }
+
+        .info-highlight h3 {
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-list li {
+            font-size: 18px;
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .info-list li:before {
+            content: "⭐";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Houses Section */
+        .houses-intro {
+            text-align: center;
+            margin: 60px 0 40px;
+        }
+
+        .houses-intro h2 {
+            font-size: 42px;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .houses-intro p {
+            font-size: 22px;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .houses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .house-card {
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 3px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .house-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            transition: opacity 0.3s;
+        }
+
+        .house-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .house-card:hover:before {
+            opacity: 0.2;
+        }
+
+        /* Gryffindor */
+        .gryffindor {
+            background: linear-gradient(135deg, #740001 0%, #ae0001 100%);
+            border-color: #ffc500;
+        }
+
+        .gryffindor:before {
+            background: #ffc500;
+        }
+
+        /* Ravenclaw */
+        .ravenclaw {
+            background: linear-gradient(135deg, #0e1a40 0%, #222f5b 100%);
+            border-color: #946b2d;
+        }
+
+        .ravenclaw:before {
+            background: #946b2d;
+        }
+
+        /* Hufflepuff */
+        .hufflepuff {
+            background: linear-gradient(135deg, #ffdb00 0%, #ffed4e 100%);
+            border-color: #000;
+        }
+
+        .hufflepuff:before {
+            background: #000;
+        }
+
+        .hufflepuff .house-name,
+        .hufflepuff .house-motto {
+            color: #000;
+        }
+
+        .hufflepuff .trait {
+            color: #2d2d2d;
+        }
+
+        /* Slytherin */
+        .slytherin {
+            background: linear-gradient(135deg, #1a472a 0%, #2a684a 100%);
+            border-color: #aaaaaa;
+        }
+
+        .slytherin:before {
+            background: #aaaaaa;
+        }
+
+        .house-icon {
+            font-size: 90px;
+            margin-bottom: 20px;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .house-name {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .house-motto {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .traits-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px 0 15px;
+            text-decoration: underline;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trait {
+            font-size: 18px;
+            padding: 8px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .house-description {
+            margin-top: 20px;
+            font-size: 17px;
+            line-height: 1.6;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 30px;
+            border-top: 2px solid #d4af37;
+            font-size: 20px;
+            color: #d4af37;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 36px;
+            }
+
+            .castle-icon {
+                font-size: 60px;
+            }
+
+            .subtitle {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .info-text {
+                font-size: 18px;
+            }
+
+            .houses-intro h2 {
+                font-size: 32px;
+            }
+
+            .houses-intro p {
+                font-size: 18px;
+            }
+
+            .house-name {
+                font-size: 28px;
+            }
+
+            .house-icon {
+                font-size: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="main-title">Hogwarts School of Witchcraft and Wizardry</h1>
+            <div class="castle-icon">🏰</div>
+            <p class="subtitle">Draco Dormiens Nunquam Titillandus</p>
+            <p style="font-size: 16px; color: #c0c0c0; margin-top: 10px;">(Never Tickle a Sleeping Dragon)</p>
+        </div>
+
+        <!-- Hogwarts Information -->
+        <div class="info-section">
+            <h2 class="section-title">🌟 About Hogwarts 🌟</h2>
+            
+            <p class="info-text">
+                Hogwarts School of Witchcraft and Wizardry is the finest magical institution in Great Britain, and one of the most prestigious wizarding schools in the world. Founded over a thousand years ago by four of the greatest witches and wizards of the age—Godric Gryffindor, Helga Hufflepuff, Rowena Ravenclaw, and Salazar Slytherin—Hogwarts has been educating young witches and wizards for generations.
+            </p>
+
+            <p class="info-text">
+                The castle is located in the Scottish Highlands and is hidden from the Muggle world by powerful enchantments. To non-magical people, it appears as nothing more than a ruin with danger signs. The castle itself is a magnificent structure with moving staircases, secret passages, talking portraits, and rooms that appear only when needed.
+            </p>
+
+            <div class="info-highlight">
+                <h3>🎓 Education at Hogwarts</h3>
+                <ul class="info-list">
+                    <li>Students attend Hogwarts for seven years, from ages 11 to 17</li>
+                    <li>Classes include Potions, Transfiguration, Charms, Defense Against the Dark Arts, and more</li>
+                    <li>Students live in the castle during the school year, returning home for holidays</li>
+                    <li>The school year runs from September 1st to late June</li>
+                    <li>Students are sorted into one of four houses upon arrival</li>
+                </ul>
+            </div>
+
+            <div class="info-highlight">
+                <h3>✨ The Castle Grounds</h3>
+                <ul class="info-list">
+                    <li>The Great Hall with its enchanted ceiling that mirrors the sky</li>
+                    <li>The library containing thousands of magical books</li>
+                    <li>The Forbidden Forest, home to many magical creatures</li>
+                    <li>The Black Lake with the giant squid and merpeople</li>
+                    <li>The Quidditch pitch for the school's favorite sport</li>
+                    <li>Numerous towers, dungeons, and secret passages</li>
+                </ul>
+            </div>
+
+            <p class="info-text">
+                The castle is protected by ancient magic and hundreds of spells. It cannot be found on any map, and electronic devices don't work within its walls due to the high concentration of magic. Hogwarts is not just a school—it's a home, a sanctuary, and a place where magic comes alive.
+            </p>
+        </div>
+
+        <!-- Houses Introduction -->
+        <div class="houses-intro">
+            <h2>🏛️ The Four Houses of Hogwarts 🏛️</h2>
+            <p>
+                When students first arrive at Hogwarts, they are sorted into one of four houses by the legendary Sorting Hat. Each house was founded by one of the school's original founders and values different qualities in its members. Your house becomes your family at Hogwarts—you live with them, attend classes with them, and compete for the House Cup together.
+            </p>
+        </div>
+
+        <!-- Houses Grid -->
+        <div class="houses-grid">
+            <!-- Gryffindor -->
+            <div class="house-card gryffindor">
+                <span class="house-icon">🦁</span>
+                <h3 class="house-name">Gryffindor</h3>
+                <p class="house-motto">"Their daring, nerve, and chivalry set Gryffindors apart"</p>
+                
+                <div class="traits-title">Core Traits:</div>
+                <div class="trait">⚔️ Brave</div>
+                <div class="trait">💪 Courageous</div>
+                <div class="trait">🛡️ Bold</div>
+                
+                <p class="house-description">
+                    Founded by Godric Gryffindor, this house values courage, bravery, and determination above all else. Gryffindors are known for standing up for what is right, even in the face of danger. They are daring adventurers who face challenges head-on with unwavering resolve.
+                </p>
+            </div>
+
+            <!-- Ravenclaw -->
+            <div class="house-card ravenclaw">
+                <span class="house-icon">🦅</span>
+                <h3 class="house-name">Ravenclaw</h3>
+                <p class="house-motto">"Wit beyond measure is man's greatest treasure"</p>
+                
+                <div class="traits-title">Core Traits:</div>
+                <div class="trait">📚 Wise</div>
+                <div class="trait">🧠 Smart</div>
+                <div class="trait">💡 Witty</div>
+                
+                <p class="house-description">
+                    Founded by Rowena Ravenclaw, this house prizes intelligence, wisdom, and wit. Ravenclaws are known for their love of learning and their creative approach to problem-solving. They value knowledge and are always seeking to expand their understanding of the magical world.
+                </p>
+            </div>
+
+            <!-- Hufflepuff -->
+            <div class="house-card hufflepuff">
+                <span class="house-icon">🦡</span>
+                <h3 class="house-name">Hufflepuff</h3>
+                <p class="house-motto">"Those patient Hufflepuffs are true and unafraid of toil"</p>
+                
+                <div class="traits-title">Core Traits:</div>
+                <div class="trait">🤝 Loyal</div>
+                <div class="trait">😊 Friendly</div>
+                <div class="trait">❤️ Kind</div>
+                
+                <p class="house-description">
+                    Founded by Helga Hufflepuff, this house values loyalty, patience, and hard work. Hufflepuffs are known for their dedication to their friends and their strong sense of fairness. They treat everyone with kindness and respect, making them the most inclusive house at Hogwarts.
+                </p>
+            </div>
+
+            <!-- Slytherin -->
+            <div class="house-card slytherin">
+                <span class="house-icon">🐍</span>
+                <h3 class="house-name">Slytherin</h3>
+                <p class="house-motto">"Those cunning folk use any means to achieve their ends"</p>
+                
+                <div class="traits-title">Core Traits:</div>
+                <div class="trait">🎯 Ambitious</div>
+                <div class="trait">👑 Proud</div>
+                <div class="trait">🧩 Cunning</div>
+                
+                <p class="house-description">
+                    Founded by Salazar Slytherin, this house values ambition, cunning, and resourcefulness. Slytherins are determined to achieve their goals and are clever strategists. They take pride in their accomplishments and are natural leaders who use their intelligence to succeed.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            ✨ Welcome to Hogwarts - Where Magic Begins ✨
+        </div>
+    </div>
+</body>
+</html>
