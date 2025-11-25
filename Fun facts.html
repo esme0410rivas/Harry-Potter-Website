@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨ Fun Facts | The Wizarding World</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English:ital@0;1&family=Roboto:wght@300;400;500&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'IM Fell English', serif;
+      background-color: #0d0b12;
+      color: #f9f5e8;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 0 30px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      letter-spacing: 3px;
+      color: #d4af37;
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      font-style: italic;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .intro {
+      background: rgba(20, 18, 25, 0.85);
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px 0;
+      font-size: 1.1rem;
+      border: 1px solid #3a3545;
+      text-align: center;
+    }
+
+    .section {
+      background: rgba(18, 15, 22, 0.92);
+      border: 1px solid #4a425a;
+      border-radius: 14px;
+      padding: 25px;
+      margin: 25px 0;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.0rem;
+      color: #d4af37;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+    }
+
+    .fact-card {
+      background: rgba(30, 25, 40, 0.6);
+      border-radius: 10px;
+      padding: 20px;
+      border-left: 3px solid #5a4a35;
+    }
+
+    .fact-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fact-icon {
+      font-size: 1.2rem;
+    }
+
+    .fact-text {
+      font-size: 1.05rem;
+    }
+
+    .number {
+      color: #ffd700;
+      font-weight: bold;
+    }
+
+    .highlight {
+      color: #d4af37;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.95rem;
+      color: #aaa;
+      border-top: 1px solid #3a3545;
+    }
+
+    @media (max-width: 650px) {
+      h1 { font-size: 2.5rem; }
+      .facts-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>✨ WIZARDING WORLD TRIVIA</h1>
+      <p class="subtitle">“The truth.” “It is a beautiful and terrible thing…” — Dumbledore & Harry</p>
+    </header>
+
+    <div class="intro">
+      <p>Step beyond the books and films — here are <strong>30+ verified fun facts</strong> from J.K. Rowling’s notes, Pottermore, and interviews.  
+      Some are whimsical, some surprising, all utterly <em>magical</em>.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🏰 Hogwarts Castle</h2>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <h3 class="fact-title">🪜 142 Staircases</h3>
+          <p class="fact-text">Hogwarts has exactly <span class="number">142 staircases</span> — some wide and sweeping, others narrow and rickety. Many change positions, and a few lead nowhere on Fridays.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🕒 Moving Staircases</h3>
+          <p class="fact-text">The staircases don’t just move — they <em>rotate</em>, <em>vanish</em>, and even <em>sulk</em>. First-years are often late because of them.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🚪 7th-Floor Secret</h3>
+          <p class="fact-text">The Room of Requirement only appears when a *real need* arises — and changes completely to suit it. Its existence is unknown to most staff.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🪞 One Mirror</h3>
+          <p class="fact-text">The Mirror of Erised shows “the deepest, most desperate desire of our hearts.” Its name? <em>Erised</em> = <span class="highlight">“desire”</span> backwards.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🔮 Magic & Spells</h2>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <h3 class="fact-title">📜 Unbreakable Vow</h3>
+          <p class="fact-text">Breaking an Unbreakable Vow causes <span class="highlight">instant death</span>. The magic is sealed with flame — no known counter-curse exists.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🕯️ Lumos Origin</h3>
+          <p class="fact-text">“<em>Lumos</em>” comes from Latin <span class="highlight">“lumen”</span> (light). “<em>Nox</em>” (to extinguish) means <span class="highlight">“night”</span> in Latin.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🧪 True Love Potion?</h3>
+          <p class="fact-text">Amortentia is the most powerful love *potion* — but it only creates <em>infatuation</em>. True love cannot be created by magic.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🧩 Wand Loyalty</h3>
+          <p class="fact-text">A wand’s allegiance shifts when its owner is <em>disarmed, stunned, or overpowered</em> — not necessarily killed. Expelliarmus is enough!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🦉 Magical Creatures</h2>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <h3 class="fact-title">🦉 Owl Post</h3>
+          <p class="fact-text">Owls find recipients <em>by name alone</em> — even if they’ve never met them. No address needed. (Muggles just think it’s “odd postal service.”)</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🐉 Dragon Blood Uses</h3>
+          <p class="fact-text">Dragon blood has <span class="number">12 known uses</span> — including oven cleaner and spot remover. (Per *Fantastic Beasts*.)</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🦄 Unicorn Tears</h3>
+          <p class="fact-text">Drinking unicorn blood keeps you alive — but cursed to a “half-life,” filled with pain. Voldemort used it to sustain himself in 1997.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🐀 Rat Lifespan</h3>
+          <p class="fact-text">Ordinary rats live 2–3 years. Scabbers (Peter Pettigrew) was <span class="number">12 years old</span> — a clue he wasn’t a real rat!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🧙 Characters & Lore</h2>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <h3 class="fact-title">⚡ Harry’s Scar</h3>
+          <p class="fact-text">The lightning bolt scar is the *only* wound Voldemort ever failed to kill with — making Harry the “Boy Who Lived.”</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">📜 Tom Riddle’s Name</h3>
+          <p class="fact-text">“<em>Tom Marvolo Riddle</em>” anagrams to <span class="highlight">“I am Lord Voldemort”</span> — in English. (French and other translations were rewritten to preserve this!)</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🦉 Hedwig’s Fate</h3>
+          <p class="fact-text">Hedwig’s death in *Deathly Hallows* symbolizes the end of Harry’s childhood — a deliberate, heartbreaking choice by J.K. Rowling.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🔍 Dumbledore’s Boggart</h3>
+          <p class="fact-text">J.K. Rowling confirmed: Dumbledore’s Boggart takes the form of <span class="highlight">the corpse of his sister, Ariana</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🔢 Numbers & Oddities</h2>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <h3 class="fact-title">🚂 Platform 9¾</h3>
+          <p class="fact-text">The number 9¾ was chosen because it’s “between the ordinary and the magical.” Real King’s Cross has Platforms 9 and 10 — but the gap is a wall!</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">📦 Gringotts Vaults</h3>
+          <p class="fact-text">Gringotts has <span class="number">over 1,000 vaults</span>, guarded by dragons, curses, and goblins. The deeper you go, the more dangerous — and valuable — the contents.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">📅 Hogwarts Start Date</h3>
+          <p class="fact-text">Term begins on <span class="highlight">1 September</span> — same as many UK schools. The Hogwarts Express departs at 11:00 AM sharp.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🕰️ Time-Turner Limit</h3>
+          <p class="fact-text">Using a Time-Turner for more than <span class="number">5 hours</span> risks “catastrophic harm” — madness, disappearance, or becoming trapped in time.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">💫 Bonus Deep Cuts</h2>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <h3 class="fact-title">🎨 Hogwarts Paintings</h3>
+          <p class="fact-text">Portraits at Hogwarts are sentient — but only if the subject *willingly* gave a memory imprint before death. (Hence, Dumbledore’s portrait could advise.)</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">📜 The Marauder’s Map</h3>
+          <p class="fact-text">It was created over <span class="number">3 years</span> by James, Sirius, Remus, and Peter — using the Homonculous Charm and secret passages they discovered.</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">🦉 Patronus Uniqueness</h3>
+          <p class="fact-text">A Patronus reflects your *innermost self* — and can change with profound emotional shifts. (e.g., Tonks’ changed when she fell in love with Lupin.)</p>
+        </div>
+        <div class="fact-card">
+          <h3 class="fact-title">📜 Last Sentence</h3>
+          <p class="fact-text">The final line of the entire series:  
+          <span class="highlight">“The scar had not pained Harry for nineteen years. All was well.”</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin: 30px 0; font-style: italic; color: #d4af37;">
+      “Numbing the pain for a while will make it worse when you finally feel it.” — Albus Dumbledore
+    </div>
+
+    <footer>
+      <p>© 2025 Wizarding World Archive | Facts sourced from <em>Harry Potter</em> books, Pottermore, and J.K. Rowling interviews</p>
+      <p><em>"Every great wizard in history has started out as nothing more than what we are now: students." — Minerva McGonagall</em></p>
+    </footer>
+  </div>
+</body>
+</html>
