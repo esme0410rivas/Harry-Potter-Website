@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📚 Hogwarts Classes | Course Catalogue</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English:ital@0;1&family=Roboto:wght@300;400;500&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'IM Fell English', serif;
+      background-color: #0d0b12;
+      color: #f9f5e8;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 0 30px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      letter-spacing: 3px;
+      color: #d4af37;
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      font-style: italic;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .intro {
+      background: rgba(20, 18, 25, 0.85);
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px 0;
+      font-size: 1.1rem;
+      border: 1px solid #3a3545;
+      text-align: center;
+    }
+
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    .class-card {
+      background: rgba(18, 15, 22, 0.92);
+      border: 1px solid #4a425a;
+      border-radius: 14px;
+      padding: 25px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .class-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      border-color: #d4af37;
+    }
+
+    .class-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: #d4af37;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .class-icon {
+      font-size: 1.6rem;
+    }
+
+    .class-details p {
+      margin: 10px 0;
+    }
+
+    .professor {
+      font-weight: 500;
+      color: #ffd700;
+    }
+
+    .fun-fact {
+      font-style: italic;
+      color: #aaa;
+      border-left: 3px solid #5a4a35;
+      padding-left: 12px;
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
+
+    .note {
+      background: rgba(30, 28, 40, 0.7);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 30px 0;
+      font-style: italic;
+      border-left: 4px solid #d4af37;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.95rem;
+      color: #aaa;
+      border-top: 1px solid #3a3545;
+    }
+
+    @media (max-width: 650px) {
+      h1 { font-size: 2.5rem; }
+      .classes-grid { grid-template-columns: 1fr; }
+      .class-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📚 HOGWARTS COURSE CATALOGUE</h1>
+      <p class="subtitle">"Wit beyond measure is man’s greatest treasure." — Rowena Ravenclaw</p>
+    </header>
+
+    <div class="intro">
+      <p>At Hogwarts School of Witchcraft and Wizardry, students study a rich curriculum designed to develop magical skill, wisdom, and character.  
+      First-years take seven core subjects; electives begin in third year. Each class is taught by a master of their craft — some more… *memorable* than others.</p>
+    </div>
+
+    <div class="classes-grid">
+      <!-- Defence Against the Dark Arts -->
+      <div class="class-card">
+        <h2 class="class-title">🛡️ Defence Against the Dark Arts</h2>
+        <div class="class-details">
+          <p>Learn to protect yourself against the Dark Arts — curses, jinxes, hexes, and dark creatures.</p>
+          <p><strong>Key Skills:</strong> Shield Charms, Patronus Charm, duelling, identifying dark objects.</p>
+          <p><span class="professor">Notable Professors:</span> Remus Lupin, Alastor Moody (imposter), Severus Snape</p>
+          <p class="fun-fact">✨ This position is cursed — no professor has held it for more than one year!</p>
+        </div>
+      </div>
+
+      <!-- Charms -->
+      <div class="class-card">
+        <h2 class="class-title">✨ Charms</h2>
+        <div class="class-details">
+          <p>The art of casting spells that alter the properties of an object or creature — without changing its nature.</p>
+          <p><strong>Key Spells:</strong> Wingardium Leviosa, Lumos, Expelliarmus, Cheering Charm.</p>
+          <p><span class="professor">Professor:</span> Filius Flitwick (Head of Ravenclaw)</p>
+          <p class="fun-fact">✨ Charms is considered the most creative and artistic branch of magic.</p>
+        </div>
+      </div>
+
+      <!-- Potions -->
+      <div class="class-card">
+        <h2 class="class-title">🧪 Potions</h2>
+        <div class="class-details">
+          <p>Brew magical mixtures with precise ingredients, timing, and stirring technique.</p>
+          <p><strong>Key Potions:</strong> Polyjuice Potion, Felix Felicis, Draught of Living Death.</p>
+          <p><span class="professor">Notable Professors:</span> Severus Snape, Horace Slughorn</p>
+          <p class="fun-fact">✨ A single wrong stir can turn a luck potion into a poison!</p>
+        </div>
+      </div>
+
+      <!-- Transfiguration -->
+      <div class="class-card">
+        <h2 class="class-title">🌀 Transfiguration</h2>
+        <div class="class-details">
+          <p>The complex and dangerous art of changing the form or appearance of an object or person.</p>
+          <p><strong>Key Spells:</strong> Turning a match into a needle, Animagus transformation, human transfiguration.</p>
+          <p><span class="professor">Professor:</span> Minerva McGonagall (Deputy Headmistress, Head of Gryffindor)</p>
+          <p class="fun-fact">✨ Considered one of the most difficult subjects — requires precision, concentration, and ethics.</p>
+        </div>
+      </div>
+
+      <!-- Herbology -->
+      <div class="class-card">
+        <h2 class="class-title">🌿 Herbology</h2>
+        <div class="class-details">
+          <p>Study of magical plants and fungi — their care, properties, and uses in potions and healing.</p>
+          <p><strong>Key Plants:</strong> Mandrakes, Venomous Tentacula, Devil’s Snare, Gillyweed.</p>
+          <p><span class="professor">Professor:</span> Pomona Sprout (Head of Hufflepuff)</p>
+          <p class="fun-fact">✨ Mandrake cries can be fatal — earmuffs are mandatory during repotting!</p>
+        </div>
+      </div>
+
+      <!-- History of Magic -->
+      <div class="class-card">
+        <h2 class="class-title">📜 History of Magic</h2>
+        <div class="class-details">
+          <p>Chronicles of the wizarding world — goblin rebellions, giant wars, and the founding of Hogwarts.</p>
+          <p><strong>Topics:</strong> International Statute of Secrecy, rise of Dark Wizards, magical governance.</p>
+          <p><span class="professor">Professor:</span> Professor Binns (a ghost who never noticed he died)</p>
+          <p class="fun-fact">✨ The only class taught by a ghost — and famously the most… *sleep-inducing*.</p>
+        </div>
+      </div>
+
+      <!-- Astronomy -->
+      <div class="class-card">
+        <h2 class="class-title">🔭 Astronomy</h2>
+        <div class="class-details">
+          <p>Study of stars, planets, and celestial events — and their magical significance.</p>
+          <p><strong>Activities:</strong> Midnight observations, star charting, lunar phase tracking.</p>
+          <p><span class="professor">Professor:</span> Aurora Sinistra</p>
+          <p class="fun-fact">✨ Exams are held at midnight — don’t forget your telescope and warm robes!</p>
+        </div>
+      </div>
+
+      <!-- Flying (First Years) -->
+      <div class="class-card">
+        <h2 class="class-title">🧹 Flying Lessons</h2>
+        <div class="class-details">
+          <p>Introduction to broomstick flight — mounting, hovering, directional control, and safety.</p>
+          <p><strong>Key Skill:</strong> "Up!" command, emergency dismounts, basic manoeuvres.</p>
+          <p><span class="professor">Instructor:</span> Madam Rolanda Hooch</p>
+          <p class="fun-fact">✨ Neville’s first broom famously knocked him out — but later, he became a skilled flyer!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <p>🎓 <strong>Third-Year Electives include:</strong> Arithmancy, Ancient Runes, Care of Magical Creatures, Divination, and Muggle Studies.<br>
+      🪄 <em>“The world is full of common objects enchanted in extraordinary ways…” — Miranda Goshawk, <u>The Standard Book of Spells</u></em></p>
+    </div>
+
+    <footer>
+      <p>© 2025 Hogwarts School of Witchcraft and Wizardry | Curriculum approved by the Ministry of Magic</p>
+      <p><em>"Education is the most powerful wand." — Albus Dumbledore (possibly)</em></p>
+    </footer>
+  </div>
+</body>
+</html>
