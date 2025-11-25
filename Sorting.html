@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>⚡ The Sorting Hat Ceremony | Hogwarts</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English:ital@0;1&family=Roboto:wght@300;400;500&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'IM Fell English', serif;
+      background-color: #0d0b12;
+      color: #f9f5e8;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px;
+      transition: background-color 0.8s ease;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 0 20px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      letter-spacing: 3px;
+      color: #d4af37;
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    .hat-quote {
+      font-style: italic;
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 25px auto;
+      padding: 20px;
+      background: rgba(30, 25, 20, 0.85);
+      border-radius: 10px;
+      border-left: 4px solid #d4af37;
+      font-family: 'IM Fell English', serif;
+      text-align: center;
+    }
+
+    .instructions {
+      background: rgba(20, 18, 25, 0.85);
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px 0;
+      font-size: 1.1rem;
+      border: 1px solid #3a3545;
+    }
+
+    .btn {
+      display: block;
+      margin: 30px auto;
+      padding: 14px 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      background: #3d2b1f;
+      color: #ffd700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      letter-spacing: 1.5px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn:hover {
+      background: #5a3e2a;
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .quiz-section, .result-section {
+      background: rgba(18, 15, 22, 0.92);
+      border: 1px solid #4a425a;
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .active {
+      display: block !important;
+    }
+
+    .question-number {
+      color: #d4af37;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .question-text {
+      font-size: 1.6rem;
+      margin-bottom: 25px;
+      font-family: 'Cinzel', serif;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .option-btn {
+      background: rgba(35, 30, 45, 0.7);
+      color: #f9f5e8;
+      border: 1px solid #5a506e;
+      padding: 16px;
+      text-align: left;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 1.1rem;
+    }
+
+    .option-btn:hover {
+      background: rgba(50, 42, 65, 0.9);
+      border-color: #d4af37;
+    }
+
+    .option-btn.selected {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: #d4af37;
+      font-weight: 600;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .back-btn {
+      background: #2b253a;
+      color: #ccc;
+    }
+
+    .result-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .house-name {
+      font-family: 'Cinzel', serif;
+      font-size: 3.6rem;
+      margin: 20px 0 15px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+
+    .traits-list {
+      list-style: none;
+      margin: 25px 0;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    .traits-list li {
+      margin: 10px 0;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      font-family: 'IM Fell English', serif;
+    }
+
+    .fun-fact-box {
+      background: rgba(30, 28, 40, 0.7);
+      border-left: 4px solid #d4af37;
+      padding: 20px;
+      margin: 30px 0;
+      font-style: italic;
+      font-size: 1.15rem;
+      font-family: 'IM Fell English', serif;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.95rem;
+      color: #aaa;
+      border-top: 1px solid #3a3545;
+    }
+
+    @media (max-width: 650px) {
+      h1 { font-size: 2.5rem; }
+      .house-name { font-size: 2.7rem; }
+      .btn { padding: 12px 30px; font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🪄 THE SORTING HAT CEREMONY</h1>
+      <p class="subtitle">“You might belong in Gryffindor, where dwell the brave at heart…”</p>
+    </header>
+
+    <div class="hat-quote">
+      <em>“Ah, another year, another batch of minds to probe...  
+      Fear not — I’ve never made a mistake!  
+      Where shall I put you? Let’s find out together.”</em>
+    </div>
+
+    <div class="instructions">
+      <p>🧙‍♂️ <strong>Welcome, young witch or wizard!</strong>  
+      You will answer <strong>10 questions</strong> to uncover your true nature.<br>  
+      Answer honestly — your House will reflect your deepest values:</p>
+      <ul style="margin: 15px 0 0 20px; padding-left: 10px;">
+        <li><strong>🦁 Gryffindor:</strong> Bravery, Courage, Boldness, Chivalry</li>
+        <li><strong>🦅 Ravenclaw:</strong> Wisdom, Wit, Intelligence, Curiosity</li>
+        <li><strong>🦡 Hufflepuff:</strong> Loyalty, Kindness, Patience, Fairness</li>
+        <li><strong>🐍 Slytherin:</strong> Ambition, Cunning, Resourcefulness, Leadership</li>
+      </ul>
+      <p style="margin-top: 15px;">✨ Your result will appear with your House’s colors — and a message from the Hat!</p>
+    </div>
+
+    <button id="startQuizBtn" class="btn">Begin the Ceremony</button>
+
+    <section id="quizSection" class="quiz-section">
+      <div class="question-number">Question <span id="qIndex">1</span> of 10</div>
+      <div class="question-text" id="currentQuestion">Loading...</div>
+      <div class="options" id="optionButtons"></div>
+      <div class="nav-buttons">
+        <button id="backBtn" class="btn back-btn">← Back</button>
+        <button id="nextBtn" class="btn" disabled>Next Question →</button>
+      </div>
+    </section>
+
+    <section id="resultSection" class="result-section">
+      <div class="result-header">
+        <h2 class="house-name" id="houseTitle">Gryffindor</h2>
+        <p>The Sorting Hat declares:</p>
+      </div>
+
+      <div class="hat-quote" id="hatSpeech">
+        "Ah! A heart that races at danger, not from fear — but from the thrill of doing what’s right!  
+        Yes… yes… better be <strong>GRYFFINDOR!</strong>"
+      </div>
+
+      <ul class="traits-list" id="traitsList">
+        <li>Bravery in the face of darkness</li>
+        <li>Unflinching loyalty to friends</li>
+        <li>Daring to stand alone for justice</li>
+      </ul>
+
+      <div class="fun-fact-box" id="funFact">
+        🏆 Gryffindor won the House Cup in Harry’s first year — thanks to Neville’s courage!
+      </div>
+
+      <button id="restartBtn" class="btn">↺ Try the Ceremony Again</button>
+    </section>
+
+    <footer>
+      <p>© 2025 Hogwarts School of Witchcraft and Wizardry</p>
+      <p><em>"It is our choices, Harry, that show what we truly are..."</em></p>
+    </footer>
+  </div>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "A dark corridor lies ahead — you hear strange noises. You:",
+        options: [
+          { text: "Draw your wand and enter — better to face it now!", house: "gryffindor" },
+          { text: "Analyze the sounds first: magical resonance? trap frequency?", house: "ravenclaw" },
+          { text: "Gather friends — no one should face danger alone.", house: "hufflepuff" },
+          { text: "Wait and observe: knowledge of the threat is power.", house: "slytherin" }
+        ]
+      },
+      {
+        text: "You discover a secret spell in an old book. You:",
+        options: [
+          { text: "Test it immediately — magic is meant to be used!", house: "gryffindor" },
+          { text: "Study its theory for weeks before attempting it.", house: "ravenclaw" },
+          { text: "Share it with classmates who might benefit.", house: "hufflepuff" },
+          { text: "Master it in secret — advantage is everything.", house: "slytherin" }
+        ]
+      },
+      {
+        text: "Your friend is accused of cheating — but you know they’re innocent. You:",
+        options: [
+          { text: "Defend them publicly, even if it angers the professor.", house: "gryffindor" },
+          { text: "Gather irrefutable evidence to prove their innocence.", house: "ravenclaw" },
+          { text: "Stay by their side and help them stay strong.", house: "hufflepuff" },
+          { text: "Let them take the fall — unless helping benefits me more.", house: "slytherin" }
+        ]
+      },
+      {
+        text: "Which magical object calls to you most?",
+        options: [
+          { text: "The Sword of Gryffindor — forged in fire, wielded in need.", house: "gryffindor" },
+          { text: "Ravenclaw’s Diadem — wisdom to enhance the mind.", house: "ravenclaw" },
+          { text: "Helga’s Cup — a symbol of generosity and unity.", house: "hufflepuff" },
+          { text: "Slytherin’s Locket — ancient, powerful, and commanding.", house: "slytherin" }
+        ]
+      },
+      {
+        text: "How do you handle failure?",
+        options: [
+          { text: "Get back up — failure is just a step before victory.", house: "gryffindor" },
+          { text: "Study what went wrong — every mistake teaches.", house: "ravenclaw" },
+          { text: "Support others who failed — we heal together.", house: "hufflepuff" },
+          { text: "Never let anyone see me fail — re-strategize in silence.", house: "slytherin" }
+        ]
+      },
+      {
+        text: "Your ideal club at Hogwarts would be:",
+        options: [
+          { text: "Dueling Club — test courage and reflexes!", house: "gryffindor" },
+          { text: "Magical Theory & Debate Society", house: "ravenclaw" },
+          { text: "Hogwarts Helpers — tutoring, gardening, care for creatures", house: "hufflepuff" },
+          { text: "The Slug Club (or start your own elite network)", house: "slytherin" }
+        ]
+      },
+      {
+        text: "You find a lost first-year crying in the halls. You:",
+        options: [
+          { text: "Escort them boldly — no one bullies under my watch!", house: "gryffindor" },
+          { text: "Ask diagnostic questions to assess their distress.", house: "ravenclaw" },
+          { text: "Hug them, listen, and walk them to their common room.", house: "hufflepuff" },
+          { text: "Offer help — but only if they prove themselves worthy.", house: "slytherin" }
+        ]
+      },
+      {
+        text: "What matters most in a friendship?",
+        options: [
+          { text: "Loyalty — you’d take a curse for them.", house: "gryffindor" },
+          { text: "Intellectual stimulation — our minds spark together.", house: "ravenclaw" },
+          { text: "Trust and kindness — no judgment, always support.", house: "hufflepuff" },
+          { text: "Mutual benefit and ambition — we rise together.", house: "slytherin" }
+        ]
+      },
+      {
+        text: "You’re given leadership of a project. You:",
+        options: [
+          { text: "Inspire the team with bold vision and lead from the front.", house: "gryffindor" },
+          { text: "Design an optimal strategy before assigning roles.", house: "ravenclaw" },
+          { text: "Ensure everyone feels valued and heard.", house: "hufflepuff" },
+          { text: "Take control — success requires decisive authority.", house: "slytherin" }
+        ]
+      },
+      {
+        text: "The Sorting Hat pauses on your head... What do you whisper?",
+        options: [
+          { text: "“Put me where I can make a difference — no matter the danger.”", house: "gryffindor" },
+          { text: "“Let me learn, grow, and understand the deepest magic.”", house: "ravenclaw" },
+          { text: "“Where I can help, heal, and belong.”", house: "hufflepuff" },
+          { text: "“Where I will thrive, achieve greatness, and lead.”", house: "slytherin" }
+        ]
+      }
+    ];
+
+    const HOUSES = {
+      gryffindor: {
+        name: "GRYFFINDOR",
+        color: "#8B0000",
+        traits: ["Bravery", "Courage", "Boldness", "Chivalry", "Daring"],
+        speech: `"Ah! A heart that races at danger, not from fear — but from the thrill of doing what’s right!  
+                 Yes… yes… better be <strong>GRYFFINDOR!</strong>"`,
+        fact: "🔥 Gryffindor values courage above all. Their common room is guarded by the Fat Lady — and accessible only with the right password."
+      },
+      ravenclaw: {
+        name: "RAVENCLAW",
+        color: "#0F52BA",
+        traits: ["Wisdom", "Wit", "Intelligence", "Creativity", "Curiosity"],
+        speech: `"Oho! A keen mind, always questioning, always reaching for truth...  
+                 Wit beyond measure is man’s greatest treasure!  
+                 <strong>RAVENCLAW!</strong>"`,
+        fact: "🦉 To enter the Ravenclaw Tower, you must answer a riddle — no password, only wisdom."
+      },
+      hufflepuff: {
+        name: "HUFFLEPUFF",
+        color: "#FFD700",
+        traits: ["Loyalty", "Kindness", "Patience", "Fairness", "Hard Work"],
+        speech: `"Ah, yes... a gentle strength — not showy, but unbreakable.  
+                 You value people, not power.  
+                 Better be <strong>HUFFLEPUFF!</strong>"`,
+        fact: "💛 Hufflepuff is the only House that never turned out a single Dark wizard — a testament to its values."
+      },
+      slytherin: {
+        name: "SLYTHERIN",
+        color: "#1A5B2E",
+        traits: ["Ambition", "Cunning", "Resourcefulness", "Leadership", "Determination"],
+        speech: `"Oh-ho! A fire in your eyes — not for glory, but for greatness.  
+                 You’ll do what must be done.  
+                 Yes… <strong>SLYTHERIN!</strong>"`,
+        fact: "💎 Slytherin produced many great witches and wizards — including Merlin and Severus Snape."
+      }
+    };
+
+    let current = 0;
+    let scores = { gryffindor: 0, ravenclaw: 0, hufflepuff: 0, slytherin: 0 };
+    let selectedOption = null;
+
+    const startBtn = document.getElementById('startQuizBtn');
+    const quizSec = document.getElementById('quizSection');
+    const resultSec = document.getElementById('resultSection');
+    const qIndexEl = document.getElementById('qIndex');
+    const qTextEl = document.getElementById('currentQuestion');
+    const optBtnsEl = document.getElementById('optionButtons');
+    const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
+    const restartBtn = document.getElementById('restartBtn');
+
+    startBtn.addEventListener('click', () => {
+      quizSec.classList.add('active');
+      startBtn.style.display = 'none';
+      renderQuestion();
+    });
+
+    nextBtn.addEventListener('click', goToNext);
+    backBtn.addEventListener('click', goToPrev);
+    restartBtn.addEventListener('click', restart);
+
+    function renderQuestion() {
+      const q = QUESTIONS[current];
+      qIndexEl.textContent = current + 1;
+      qTextEl.textContent = q.text;
+
+      optBtnsEl.innerHTML = '';
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt.text;
+        btn.onclick = () => selectOption(opt.house, btn);
+        optBtnsEl.appendChild(btn);
+      });
+
+      backBtn.style.display = current === 0 ? 'none' : 'inline-block';
+      nextBtn.disabled = true;
+    }
+
+    function selectOption(house, btn) {
+      document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedOption = house;
+      nextBtn.disabled = false;
+    }
+
+    function goToNext() {
+      if (selectedOption) {
+        scores[selectedOption]++;
+      }
+
+      if (current < QUESTIONS.length - 1) {
+        current++;
+        selectedOption = null;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function goToPrev() {
+      if (current > 0) {
+        current--;
+        renderQuestion();
+      }
+    }
+
+    function showResult() {
+      let house = 'gryffindor';
+      if (scores.ravenclaw > scores[house]) house = 'ravenclaw';
+      if (scores.hufflepuff > scores[house]) house = 'hufflepuff';
+      if (scores.slytherin > scores[house]) house = 'slytherin';
+
+      const data = HOUSES[house];
+      document.getElementById('houseTitle').textContent = data.name;
+      document.getElementById('hatSpeech').innerHTML = data.speech;
+      document.getElementById('funFact').textContent = data.fact;
+
+      const traitsEl = document.getElementById('traitsList');
+      traitsEl.innerHTML = data.traits.map(t => `<li>${t}</li>`).join('');
+
+      document.body.style.backgroundColor = data.color;
+
+      quizSec.classList.remove('active');
+      resultSec.classList.add('active');
+    }
+
+    function restart() {
+      current = 0;
+      scores = { gryffindor: 0, ravenclaw: 0, hufflepuff: 0, slytherin: 0 };
+      selectedOption = null;
+      document.body.style.backgroundColor = '#0d0b12';
+      resultSec.classList.remove('active');
+      startBtn.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
