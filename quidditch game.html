@@ -240,8 +240,8 @@
       y: canvas.height / 2,
       radius: 14,
       velocity: 0,
-      gravity: 0.45,
-      lift: -8,
+      gravity: 0.35, // (was 0.45 - slower falling)
+      lift: -9, // (was -8 - higher jump)
       trail: []
     };
 
@@ -253,10 +253,10 @@
     let frame = 0;
 
     // Spawn rates
-    const wallSpawnRate = 120; // frames
-    const bludgerSpawnRate = 300;
+    const wallSpawnRate = 150; // frames (was 120 - slower spawning)
+    const bludgerSpawnRate = 400; // (was 300 - slower spawning)
     const snitchSpawnRate = 500;
-    const powerUpSpawnRate = 400;
+    const powerUpSpawnRate = 350; // (was 400 - faster power-ups)
 
     // Draw player (enhanced broom with trail)
     function drawPlayer() {
@@ -315,19 +315,9 @@
     // Draw Bludgers (with chasing AI)
     function drawBludgers() {
       bludgers.forEach(b => {
-        // Chase player with slight lag
-        if (frame % 10 === 0) {
-          b.vx += (player.x - b.x) * 0.01;
-          b.vy += (player.y - b.y) * 0.01;
-          // Cap speed
-          const speed = Math.sqrt(b.vx * b.vx + b.vy * b.vy);
-          if (speed > 3) {
-            b.vx = (b.vx / speed) * 3;
-            b.vy = (b.vy / speed) * 3;
-          }
-        }
+        // Stationary - no movement
         b.x += b.vx;
-        b.y += b.vy;
+        b.y += 0; // Stay at same height
 
         ctx.fillStyle = '#222';
         ctx.beginPath();
@@ -437,7 +427,7 @@
       }
       if (slowFallTimer > 0) {
         slowFallTimer--;
-        player.gravity = slowFallTimer > 0 ? 0.15 : 0.45;
+        player.gravity = slowFallTimer > 0 ? 0.15 : 0.35; // (was 0.45 - match new gravity)
         if (slowFallTimer === 0) slowFall = false;
       }
 
@@ -459,7 +449,7 @@
 
       // Spawn walls
       if (frame % wallSpawnRate === 0) {
-        const gap = 160 - Math.min(score * 0.05, 60); // gets tighter
+        const gap = 180 - Math.min(score * 0.04, 50); // (was 160, gets tighter slower - larger gaps)
         const topH = 40 + Math.random() * (canvas.height - gap - 80);
         walls.push({
           x: canvas.width,
@@ -476,9 +466,9 @@
         bludgers.push({
           x: canvas.width + 50,
           y: 100 + Math.random() * (canvas.height - 200),
-          radius: 14,
-          vx: -1,
-          vy: (Math.random() - 0.5) * 2
+          radius: 12, // (was 14 - smaller size)
+          vx: -2, // Just move left
+          vy: 0 // No vertical movement
         });
       }
 
