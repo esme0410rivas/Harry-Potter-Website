@@ -22,6 +22,39 @@
       transition: background-color 0.6s ease;
     }
 
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-button {
+      background: rgba(212, 175, 55, 0.2);
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-family: 'Times New Roman', serif;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-button:hover {
+      background: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+
     .container {
       max-width: 850px;
       margin: 0 auto;
@@ -243,6 +276,17 @@
     }
 
     @media (max-width: 650px) {
+      .navbar {
+        top: 10px;
+        right: 10px;
+        gap: 8px;
+      }
+
+      .nav-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+
       h1 { font-size: 2.5rem; }
       .balls-grid, .positions-grid { grid-template-columns: 1fr; }
       .btn { padding: 12px 30px; font-size: 1.1rem; }
@@ -251,10 +295,21 @@
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="index.html" class="nav-button">Home</a>
+    <a href="about.html" class="nav-button">About</a>
+    <a href="Sorting.html" class="nav-button">Sorting Ceremony</a>
+    <a href="classes.html" class="nav-button">Classes</a>
+    <a href="quidditch.html" class="nav-button">Quidditch</a>
+    <a href="quidditch game.html" class="nav-button">Quidditch Game</a>
+    <a href="Fun facts.html" class="nav-button">Fun Facts</a>
+  </div>
+
   <div class="container">
     <header>
       <h1>🧹 QUIDDITCH</h1>
-      <p class="subtitle">“A magic beyond all we do here…” — Albus Dumbledore</p>
+      <p class="subtitle">"A magic beyond all we do here…" — Albus Dumbledore</p>
     </header>
 
     <div class="intro">
@@ -360,7 +415,7 @@
 
     <footer>
       <p>© 2025 Hogwarts School of Witchcraft and Wizardry</p>
-      <p><em>"Never be ashamed of what you are. It’s your strength." — Harry Potter</em></p>
+      <p><em>"Never be ashamed of what you are. It's your strength." — Harry Potter</em></p>
     </footer>
   </div>
 
@@ -424,7 +479,7 @@
         text: "You prefer to:",
         options: [
           { text: "Work alone — I trust my instincts.", position: "seeker" },
-          { text: "Hold the line — I’m the anchor.", position: "keeper" },
+          { text: "Hold the line — I'm the anchor.", position: "keeper" },
           { text: "Move as one — three minds, one goal.", position: "chaser" },
           { text: "Control the battlefield — chaos is my ally.", position: "beater" }
         ]
@@ -433,7 +488,7 @@
         text: "Under stress, you become:",
         options: [
           { text: "Sharper — everything slows down.", position: "seeker" },
-          { text: "Steadier — I don’t flinch.", position: "keeper" },
+          { text: "Steadier — I don't flinch.", position: "keeper" },
           { text: "More determined — we push forward.", position: "chaser" },
           { text: "More aggressive — I dominate.", position: "beater" }
         ]
@@ -441,19 +496,19 @@
       {
         text: "Which quote resonates most?",
         options: [
-          { text: "I see it — and it’s mine.", position: "seeker" },
+          { text: "I see it — and it's mine.", position: "seeker" },
           { text: "Not on my watch.", position: "keeper" },
           { text: "Pass — now! — score!", position: "chaser" },
-          { text: "Let’s even the odds.", position: "beater" }
+          { text: "Let's even the odds.", position: "beater" }
         ]
       },
       {
         text: "After a tough loss, you:",
         options: [
-          { text: "Analyze every second — especially the Snitch’s path.", position: "seeker" },
+          { text: "Analyze every second — especially the Snitch's path.", position: "seeker" },
           { text: "Review every goal — how could I have stopped it?", position: "keeper" },
           { text: "Debrief with the team — where did our rhythm break?", position: "chaser" },
-          { text: "Study the opponent’s patterns — next time, I’ll hit harder.", position: "beater" }
+          { text: "Study the opponent's patterns — next time, I'll hit harder.", position: "beater" }
         ]
       }
     ];
@@ -473,8 +528,8 @@
         emoji: "🕊️",
         color: "#d81b60",
         traits: ["Team Synergy", "Agility", "Precision Passing", "Endurance"],
-        speech: `"You lead the charge — weaving through defenders, reading your teammates’ minds.  
-                 You don’t just score goals… you conduct the game like music.  
+        speech: `"You lead the charge — weaving through defenders, reading your teammates' minds.  
+                 You don't just score goals… you conduct the game like music.  
                  The Quaffle was made for your hands."`
       },
       keeper: {
@@ -483,15 +538,15 @@
         color: "#43a047",
         traits: ["Unshakable Courage", "Quick Instincts", "Protective Loyalty", "Calm Under Fire"],
         speech: `"Three hoops. One keeper. Infinite pressure.  
-                 You don’t flinch — you <em>stand</em>.  
-                 Your team knows: as long as you’re in the air, hope remains."`
+                 You don't flinch — you <em>stand</em>.  
+                 Your team knows: as long as you're in the air, hope remains."`
       },
       beater: {
         name: "BEATER",
         emoji: "🏏",
         color: "#8e24aa",
         traits: ["Tactical Brilliance", "Fearless Aggression", "Protective Instinct", "Precision Aim"],
-        speech: `"You don’t just swing a bat — you command the chaos.  
+        speech: `"You don't just swing a bat — you command the chaos.  
                  One well-placed Bludger can shift the entire match.  
                  Your teammates fly freely… because you guard their backs."`
       }
