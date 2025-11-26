@@ -20,6 +20,39 @@
       padding: 10px;
     }
 
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-button {
+      background: rgba(212, 175, 55, 0.2);
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-family: 'Times New Roman', serif;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-button:hover {
+      background: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+
     .container {
       max-width: 800px;
       margin: 0 auto;
@@ -96,12 +129,34 @@
     .highlight { color: #d4af37; }
 
     @media (max-width: 600px) {
+      .navbar {
+        top: 10px;
+        right: 10px;
+        gap: 8px;
+      }
+
+      .nav-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+
       h1 { font-size: 1.8rem; }
       .hud { flex-direction: column; gap: 8px; }
     }
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="index.html" class="nav-button">Home</a>
+    <a href="about.html" class="nav-button">About</a>
+    <a href="Sorting.html" class="nav-button">Sorting Ceremony</a>
+    <a href="classes.html" class="nav-button">Classes</a>
+    <a href="quidditch.html" class="nav-button">Quidditch</a>
+    <a href="quidditch game.html" class="nav-button">Quidditch Game</a>
+    <a href="Fun facts.html" class="nav-button">Fun Facts</a>
+  </div>
+
   <div class="container">
     <header>
       <h1>⚡ QUIDDITCH CHASE</h1>
