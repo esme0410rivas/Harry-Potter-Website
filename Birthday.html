@@ -21,6 +21,40 @@
       padding: 20px;
     }
 
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 90%;
+    }
+
+    .nav-button {
+      background: rgba(212, 175, 55, 0.2);
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-family: 'Times New Roman', serif;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-button:hover {
+      background: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+
     .container {
       max-width: 750px;
       margin: 0 auto;
@@ -183,6 +217,19 @@
       border-top: 1px solid #3a3545;
     }
 
+    @media (max-width: 768px) {
+      .navbar {
+        top: 10px;
+        right: 10px;
+        gap: 8px;
+      }
+
+      .nav-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 2.4rem; }
       #birthdayInput { width: 90%; }
@@ -190,15 +237,27 @@
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="index.html" class="nav-button">Home</a>
+    <a href="about.html" class="nav-button">About</a>
+    <a href="Sorting.html" class="nav-button">Sorting Ceremony</a>
+    <a href="classes.html" class="nav-button">Classes</a>
+    <a href="quidditch.html" class="nav-button">Quidditch</a>
+    <a href="quidditch%20game.html" class="nav-button">Quidditch Game</a>
+    <a href="Fun%20facts.html" class="nav-button">Fun Facts</a>
+    <a href="Birthday.html" class="nav-button">Birthday Matches</a>
+  </div>
+
   <div class="container">
     <header>
       <h1>🎂 Birthday Match</h1>
-      <p class="subtitle">“Happiness can be found even in the darkest of times, if one only remembers to turn on the light.”</p>
+      <p class="subtitle">"Happiness can be found even in the darkest of times, if one only remembers to turn on the light."</p>
     </header>
 
     <div class="intro">
       <p>Enter your birthday below to discover which <strong>Harry Potter characters</strong> share your special day!<br>
-      Matches are based on <em>month and day</em> — the year doesn’t matter (magic is timeless!).</p>
+      Matches are based on <em>month and day</em> — the year doesn't matter (magic is timeless!).</p>
     </div>
 
     <div class="input-section">
@@ -213,7 +272,7 @@
       <ul id="matchesList" class="matches"></ul>
       <div id="noMatch" class="no-match" style="display:none;">
         No Hogwarts residents share your birthday…<br>
-        But that just means you’re <em>one of a kind</em>.
+        But that just means you're <em>one of a kind</em>.
       </div>
     </div>
 
@@ -223,7 +282,7 @@
 
     <footer>
       <p>© 2025 Hogwarts Registry of Births | Ministry of Magic Approved</p>
-      <p><em>"Just because you have the emotional range of a teaspoon doesn’t mean we all do." — Hermione Granger</em></p>
+      <p><em>"Just because you have the emotional range of a teaspoon doesn't mean we all do." — Hermione Granger</em></p>
     </footer>
   </div>
 
