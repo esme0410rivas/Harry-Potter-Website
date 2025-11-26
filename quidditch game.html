@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>⚡ Quidditch Chase | Catch the Snitch!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #0a0c2a, #1a1a3a);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      color: #f0f0f0;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .hud {
+      display: flex;
+      justify-content: space-around;
+      margin: 12px 0;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    #score { color: #ffd700; }
+    #snitchCount { color: #ffdf00; }
+
+    #gameCanvas {
+      background: #050815;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      border: 2px solid #d4af37;
+    }
+
+    .controls {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .btn {
+      background: #5a3e2a;
+      color: #ffd700;
+      border: none;
+      padding: 10px 25px;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 0 8px;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: #7a5230;
+      transform: scale(1.05);
+    }
+
+    .instructions {
+      background: rgba(20, 20, 40, 0.7);
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
+
+    .highlight { color: #d4af37; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      .hud { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚡ QUIDDITCH CHASE</h1>
+      <p class="subtitle">Dodge Bludgers • Catch the Snitch • Survive!</p>
+    </header>
+
+    <div class="hud">
+      <div>Score: <span id="score">0</span></div>
+      <div>Snitches: <span id="snitchCount">0</span></div>
+    </div>
+
+    <canvas id="gameCanvas" width="760" height="500"></canvas>
+
+    <div class="controls">
+      <button id="startBtn" class="btn">▶ Start Game</button>
+      <button id="restartBtn" class="btn" style="display:none;">↺ Restart</button>
+    </div>
+
+    <div class="instructions">
+      <p><strong>How to Play:</strong><br>
+      • <span class="highlight">SPACE / ↑</span> or <span class="highlight">Tap</span> to rise<br>
+      • Avoid <span class="highlight">Bludgers (⚫)</span> and <span class="highlight">Walls (🟥)</span><br>
+      • Catch the <span class="highlight">Golden Snitch (💛)</span> for +50 points!<br>
+      • Collect <span class="highlight">🌟 Felix</span> (invincibility) or <span class="highlight">🪄 Leviosa</span> (slow fall)</p>
+    </div>
+  </div>
+
+  <script>
+    // Audio context (quiet, safe, no autoplay issues)
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let canPlaySound = false;
+
+    try {
+      audioCtx = new AudioContext();
+      canPlaySound = true;
+    } catch (e) {
+      console.log("Audio disabled or not supported");
+    }
+
+    function playSound(freq, dur, type = 'sine', vol = 0.1) {
+      if (!canPlaySound || !audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.value = vol;
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      setTimeout(() => {
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+        setTimeout(() => osc.stop(), dur * 1000);
+      }, dur * 100);
+    }
+
+    // Canvas setup
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('score');
+    const snitchEl = document.getElementById('snitchCount');
+    const startBtn = document.getElementById('startBtn');
+    const restartBtn = document.getElementById('restartBtn');
+
+    // Game state
+    let gameRunning = false;
+    let score = 0;
+    let snitchesCaught = 0;
+    let invincible = false;
+    let slowFall = false;
+    let invincibilityTimer = 0;
+    let slowFallTimer = 0;
+    let animationId = null;
+    let particles = [];
+
+    // Player
+    const player = {
+      x: 120,
+      y: canvas.height / 2,
+      radius: 14,
+      velocity: 0,
+      gravity: 0.45,
+      lift: -8,
+      trail: []
+    };
+
+    // Objects
+    let walls = [];
+    let bludgers = [];
+    let snitches = [];
+    let powerUps = [];
+    let frame = 0;
+
+    // Spawn rates
+    const wallSpawnRate = 120; // frames
+    const bludgerSpawnRate = 300;
+    const snitchSpawnRate = 500;
+    const powerUpSpawnRate = 400;
+
+    // Draw player (enhanced broom with trail)
+    function drawPlayer() {
+      // Trail particles
+      player.trail.push({ x: player.x - 30, y: player.y, life: 20 });
+      if (player.trail.length > 30) player.trail.shift();
+
+      player.trail.forEach((p, i) => {
+        const alpha = p.life / 20;
+        ctx.fillStyle = `rgba(255, 215, 0, ${alpha * 0.4})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 4 - i * 0.1, 0, Math.PI * 2);
+        ctx.fill();
+        p.life--;
+      });
+
+      ctx.save();
+      ctx.translate(player.x, player.y);
+      ctx.rotate(player.velocity * 0.05);
+
+      // Broom
+      ctx.fillStyle = '#8B4513';
+      ctx.fillRect(-30, -5, 50, 10);
+      
+      // Bristles
+      ctx.strokeStyle = '#5D4037';
+      ctx.lineWidth = 1.5;
+      for (let i = 0; i < 10; i++) {
+        ctx.beginPath();
+        ctx.moveTo(-30, -5 + i);
+        ctx.lineTo(-10 - i * 1.2, Math.sin(frame * 0.1 + i) * 3);
+        ctx.stroke();
+      }
+
+      // Glow
+      const grad = ctx.createRadialGradient(-30, 0, 0, -30, 0, 15);
+      grad.addColorStop(0, invincible ? 'rgba(100, 255, 100, 0.8)' : 'rgba(255, 215, 0, 0.8)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(-30, 0, 10, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    // Draw walls
+    function drawWalls() {
+      walls.forEach(wall => {
+        ctx.fillStyle = wall.color;
+        ctx.fillRect(wall.x, 0, wall.width, wall.topH);
+        ctx.fillRect(wall.x, wall.topH + wall.gap, wall.width, canvas.height);
+      });
+    }
+
+    // Draw Bludgers (with chasing AI)
+    function drawBludgers() {
+      bludgers.forEach(b => {
+        // Chase player with slight lag
+        if (frame % 10 === 0) {
+          b.vx += (player.x - b.x) * 0.01;
+          b.vy += (player.y - b.y) * 0.01;
+          // Cap speed
+          const speed = Math.sqrt(b.vx * b.vx + b.vy * b.vy);
+          if (speed > 3) {
+            b.vx = (b.vx / speed) * 3;
+            b.vy = (b.vy / speed) * 3;
+          }
+        }
+        b.x += b.vx;
+        b.y += b.vy;
+
+        ctx.fillStyle = '#222';
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Spikes
+        ctx.strokeStyle = '#aaa';
+        ctx.lineWidth = 1.5;
+        for (let a = 0; a < Math.PI * 2; a += Math.PI / 4) {
+          ctx.beginPath();
+          ctx.moveTo(
+            b.x + Math.cos(a + frame * 0.05) * b.radius,
+            b.y + Math.sin(a + frame * 0.05) * b.radius
+          );
+          ctx.lineTo(
+            b.x + Math.cos(a + frame * 0.05) * (b.radius + 8),
+            b.y + Math.sin(a + frame * 0.05) * (b.radius + 8)
+          );
+          ctx.stroke();
+        }
+      });
+    }
+
+    // Draw Snitch (fluttering!)
+    function drawSnitches() {
+      snitches.forEach(s => {
+        s.y += Math.sin(frame * 0.2 + s.id) * 0.8; // Flutter
+        s.x -= 2 + score * 0.001; // Gets faster
+
+        ctx.fillStyle = '#FFD700';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Wings
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 1;
+        const wingOffset = Math.sin(frame * 0.3) * 4;
+        ctx.beginPath();
+        ctx.moveTo(s.x - 3, s.y);
+        ctx.quadraticCurveTo(s.x - 10, s.y - 6 - wingOffset, s.x - 3, s.y - 12);
+        ctx.moveTo(s.x + 3, s.y);
+        ctx.quadraticCurveTo(s.x + 10, s.y - 6 - wingOffset, s.x + 3, s.y - 12);
+        ctx.stroke();
+      });
+    }
+
+    // Draw Power-ups
+    function drawPowerUps() {
+      powerUps.forEach(p => {
+        p.y += Math.sin(frame * 0.1 + p.id) * 0.5;
+        p.x -= 2;
+
+        ctx.font = '16px Arial';
+        ctx.fillStyle = p.color;
+        ctx.textAlign = 'center';
+        ctx.fillText(p.symbol, p.x, p.y);
+      });
+    }
+
+    // Particles (for effects)
+    function drawParticles() {
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life--;
+        p.alpha = p.life / p.maxLife;
+
+        ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${p.alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (p.life <= 0) particles.splice(i, 1);
+      }
+    }
+
+    // Spawn effects
+    function spawnParticles(x, y, count, color) {
+      const [r, g, b] = color;
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 1 + Math.random() * 3;
+        particles.push({
+          x: x,
+          y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          r: r, g: g, b: b,
+          size: 2 + Math.random() * 3,
+          life: 20 + Math.random() * 20,
+          maxLife: 40
+        });
+      }
+    }
+
+    // Update game
+    function update() {
+      if (!gameRunning) return;
+
+      // Power-up timers
+      if (invincibilityTimer > 0) {
+        invincibilityTimer--;
+        if (invincibilityTimer === 0) invincible = false;
+      }
+      if (slowFallTimer > 0) {
+        slowFallTimer--;
+        player.gravity = slowFallTimer > 0 ? 0.15 : 0.45;
+        if (slowFallTimer === 0) slowFall = false;
+      }
+
+      // Player physics
+      player.velocity += player.gravity;
+      player.y += player.velocity;
+
+      // Bounds
+      if (player.y < player.radius) {
+        player.y = player.radius;
+        player.velocity = 0;
+      }
+      if (player.y > canvas.height - player.radius) {
+        gameOver();
+        return;
+      }
+
+      frame++;
+
+      // Spawn walls
+      if (frame % wallSpawnRate === 0) {
+        const gap = 160 - Math.min(score * 0.05, 60); // gets tighter
+        const topH = 40 + Math.random() * (canvas.height - gap - 80);
+        walls.push({
+          x: canvas.width,
+          width: 60,
+          topH: topH,
+          gap: gap,
+          color: '#8B0000',
+          passed: false
+        });
+      }
+
+      // Spawn Bludgers
+      if (frame % bludgerSpawnRate === 0) {
+        bludgers.push({
+          x: canvas.width + 50,
+          y: 100 + Math.random() * (canvas.height - 200),
+          radius: 14,
+          vx: -1,
+          vy: (Math.random() - 0.5) * 2
+        });
+      }
+
+      // Spawn Snitch
+      if (frame % snitchSpawnRate === 0 && snitches.length === 0) {
+        snitches.push({
+          x: canvas.width + 100,
+          y: 150 + Math.random() * (canvas.height - 300),
+          radius: 10,
+          id: Math.random()
+        });
+      }
+
+      // Spawn Power-ups
+      if (frame % powerUpSpawnRate === 0) {
+        const type = Math.random() > 0.5 ? 'felix' : 'leviosa';
+        powerUps.push({
+          x: canvas.width + 50,
+          y: 100 + Math.random() * (canvas.height - 200),
+          symbol: type === 'felix' ? '🌟' : '🪄',
+          color: type === 'felix' ? '#90ee90' : '#87ceeb',
+          type: type,
+          id: Math.random()
+        });
+      }
+
+      // Move & check walls
+      for (let i = walls.length - 1; i >= 0; i--) {
+        const w = walls[i];
+        w.x -= 2 + score * 0.001;
+
+        if (w.x + w.width < 0) {
+          walls.splice(i, 1);
+          continue;
+        }
+
+        if (!w.passed && w.x + w.width < player.x) {
+          w.passed = true;
+          score += 10;
+          scoreEl.textContent = score;
+          playSound(440, 0.1);
+        }
+
+        // Collision
+        if (
+          player.x + player.radius > w.x &&
+          player.x - player.radius < w.x + w.width &&
+          (player.y - player.radius < w.topH || player.y + player.radius > w.topH + w.gap)
+        ) {
+          if (!invincible) {
+            gameOver();
+            return;
+          }
+        }
+      }
+
+      // Bludger collisions
+      for (let i = bludgers.length - 1; i >= 0; i--) {
+        const b = bludgers[i];
+        if (b.x < -50) {
+          bludgers.splice(i, 1);
+          continue;
+        }
+
+        const dx = player.x - b.x;
+        const dy = player.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < player.radius + b.radius) {
+          if (!invincible) {
+            gameOver();
+            return;
+          } else {
+            bludgers.splice(i, 1);
+            spawnParticles(b.x, b.y, 30, [100, 255, 100]);
+            playSound(660, 0.1, 'square');
+          }
+        }
+      }
+
+      // Snitch collisions
+      for (let i = snitches.length - 1; i >= 0; i--) {
+        const s = snitches[i];
+        if (s.x < -50) {
+          snitches.splice(i, 1);
+          continue;
+        }
+
+        const dx = player.x - s.x;
+        const dy = player.y - s.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < player.radius + s.radius) {
+          snitches.splice(i, 1);
+          snitchesCaught++;
+          score += 50;
+          snitchEl.textContent = snitchesCaught;
+          scoreEl.textContent = score;
+          spawnParticles(s.x, s.y, 50, [255, 215, 0]);
+          playSound(880, 0.2, 'sine', 0.3);
+        }
+      }
+
+      // Power-up collisions
+      for (let i = powerUps.length - 1; i >= 0; i--) {
+        const p = powerUps[i];
+        if (p.x < -50) {
+          powerUps.splice(i, 1);
+          continue;
+        }
+
+        const dx = player.x - p.x;
+        const dy = player.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < player.radius + 15) {
+          powerUps.splice(i, 1);
+          if (p.type === 'felix') {
+            invincible = true;
+            invincibilityTimer = 300; // 5 seconds at 60fps
+            spawnParticles(player.x, player.y, 40, [144, 238, 144]);
+            playSound(523, 0.3, 'sine', 0.2);
+          } else {
+            slowFall = true;
+            slowFallTimer = 240; // 4 seconds
+            spawnParticles(player.x, player.y, 40, [135, 206, 235]);
+            playSound(392, 0.3, 'sine', 0.2);
+          }
+        }
+      }
+    }
+
+    // Render
+    function draw() {
+      // Background
+      ctx.fillStyle = '#050815';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Stars
+      ctx.fillStyle = '#ffffff';
+      for (let i = 0; i < 40; i++) {
+        const x = (frame * 0.2 + i * 19) % canvas.width;
+        const y = (i * 27) % canvas.height;
+        const size = 0.8 + Math.sin(frame * 0.01 + i) * 0.4;
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      drawWalls();
+      drawBludgers();
+      drawSnitches();
+      drawPowerUps();
+      drawParticles();
+      drawPlayer();
+    }
+
+    // Game loop
+    function gameLoop() {
+      update();
+      draw();
+      if (gameRunning) {
+        animationId = requestAnimationFrame(gameLoop);
+      }
+    }
+
+    // Controls
+    function jump() {
+      if (gameRunning) {
+        player.velocity = player.lift;
+        playSound(262, 0.05);
+      }
+    }
+
+    function startGame() {
+      player.y = canvas.height / 2;
+      player.velocity = 0;
+      player.trail = [];
+      walls = [];
+      bludgers = [];
+      snitches = [];
+      powerUps = [];
+      particles = [];
+      score = 0;
+      snitchesCaught = 0;
+      frame = 0;
+      invincible = false;
+      slowFall = false;
+      scoreEl.textContent = '0';
+      snitchEl.textContent = '0';
+      gameRunning = true;
+      startBtn.style.display = 'none';
+      restartBtn.style.display = 'none';
+      gameLoop();
+      playSound(523, 0.2, 'sine', 0.1);
+    }
+
+    function gameOver() {
+      gameRunning = false;
+      cancelAnimationFrame(animationId);
+      restartBtn.style.display = 'inline-block';
+      playSound(131, 0.3, 'sine', 0.2);
+    }
+
+    // Events
+    startBtn.addEventListener('click', startGame);
+    restartBtn.addEventListener('click', startGame);
+    canvas.addEventListener('click', jump);
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        jump();
+      }
+    });
+
+    // Responsive
+    function resize() {
+      const width = Math.min(window.innerWidth - 20, 800);
+      const height = Math.min(window.innerHeight * 0.6, 500);
+      canvas.width = width;
+      canvas.height = height;
+      player.x = 120 * (width / 760);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw(); // Initial render
+  </script>
+</body>
+</html>
