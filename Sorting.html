@@ -22,6 +22,39 @@
       transition: background-color 0.8s ease;
     }
 
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-button {
+      background: rgba(212, 175, 55, 0.2);
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-family: 'Times New Roman', serif;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-button:hover {
+      background: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+
     .container {
       max-width: 800px;
       margin: 0 auto;
@@ -204,6 +237,17 @@
     }
 
     @media (max-width: 650px) {
+      .navbar {
+        top: 10px;
+        right: 10px;
+        gap: 8px;
+      }
+
+      .nav-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+
       h1 { font-size: 2.5rem; }
       .house-name { font-size: 2.7rem; }
       .btn { padding: 12px 30px; font-size: 1.1rem; }
@@ -211,16 +255,27 @@
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="index.html" class="nav-button">Home</a>
+    <a href="about.html" class="nav-button">About</a>
+    <a href="Sorting.html" class="nav-button">Sorting Ceremony</a>
+    <a href="classes.html" class="nav-button">Classes</a>
+    <a href="quidditch.html" class="nav-button">Quidditch</a>
+    <a href="quidditch game.html" class="nav-button">Quidditch Game</a>
+    <a href="Fun facts.html" class="nav-button">Fun Facts</a>
+  </div>
+
   <div class="container">
     <header>
       <h1>🪄 THE SORTING HAT CEREMONY</h1>
-      <p class="subtitle">“You might belong in Gryffindor, where dwell the brave at heart…”</p>
+      <p class="subtitle">"You might belong in Gryffindor, where dwell the brave at heart…"</p>
     </header>
 
     <div class="hat-quote">
-      <em>“Ah, another year, another batch of minds to probe...  
-      Fear not — I’ve never made a mistake!  
-      Where shall I put you? Let’s find out together.”</em>
+      <em>"Ah, another year, another batch of minds to probe...  
+      Fear not — I've never made a mistake!  
+      Where shall I put you? Let's find out together."</em>
     </div>
 
     <div class="instructions">
@@ -233,7 +288,7 @@
         <li><strong>🦡 Hufflepuff:</strong> Loyalty, Kindness, Patience, Fairness</li>
         <li><strong>🐍 Slytherin:</strong> Ambition, Cunning, Resourcefulness, Leadership</li>
       </ul>
-      <p style="margin-top: 15px;">✨ Your result will appear with your House’s colors — and a message from the Hat!</p>
+      <p style="margin-top: 15px;">✨ Your result will appear with your House's colors — and a message from the Hat!</p>
     </div>
 
     <button id="startQuizBtn" class="btn">Begin the Ceremony</button>
@@ -255,7 +310,7 @@
       </div>
 
       <div class="hat-quote" id="hatSpeech">
-        "Ah! A heart that races at danger, not from fear — but from the thrill of doing what’s right!  
+        "Ah! A heart that races at danger, not from fear — but from the thrill of doing what's right!  
         Yes… yes… better be <strong>GRYFFINDOR!</strong>"
       </div>
 
@@ -266,7 +321,7 @@
       </ul>
 
       <div class="fun-fact-box" id="funFact">
-        🏆 Gryffindor won the House Cup in Harry’s first year — thanks to Neville’s courage!
+        🏆 Gryffindor won the House Cup in Harry's first year — thanks to Neville's courage!
       </div>
 
       <button id="restartBtn" class="btn">↺ Try the Ceremony Again</button>
@@ -299,7 +354,7 @@
         ]
       },
       {
-        text: "Your friend is accused of cheating — but you know they’re innocent. You:",
+        text: "Your friend is accused of cheating — but you know they're innocent. You:",
         options: [
           { text: "Defend them publicly, even if it angers the professor.", house: "gryffindor" },
           { text: "Gather irrefutable evidence to prove their innocence.", house: "ravenclaw" },
@@ -311,9 +366,9 @@
         text: "Which magical object calls to you most?",
         options: [
           { text: "The Sword of Gryffindor — forged in fire, wielded in need.", house: "gryffindor" },
-          { text: "Ravenclaw’s Diadem — wisdom to enhance the mind.", house: "ravenclaw" },
-          { text: "Helga’s Cup — a symbol of generosity and unity.", house: "hufflepuff" },
-          { text: "Slytherin’s Locket — ancient, powerful, and commanding.", house: "slytherin" }
+          { text: "Ravenclaw's Diadem — wisdom to enhance the mind.", house: "ravenclaw" },
+          { text: "Helga's Cup — a symbol of generosity and unity.", house: "hufflepuff" },
+          { text: "Slytherin's Locket — ancient, powerful, and commanding.", house: "slytherin" }
         ]
       },
       {
@@ -346,14 +401,14 @@
       {
         text: "What matters most in a friendship?",
         options: [
-          { text: "Loyalty — you’d take a curse for them.", house: "gryffindor" },
+          { text: "Loyalty — you'd take a curse for them.", house: "gryffindor" },
           { text: "Intellectual stimulation — our minds spark together.", house: "ravenclaw" },
           { text: "Trust and kindness — no judgment, always support.", house: "hufflepuff" },
           { text: "Mutual benefit and ambition — we rise together.", house: "slytherin" }
         ]
       },
       {
-        text: "You’re given leadership of a project. You:",
+        text: "You're given leadership of a project. You:",
         options: [
           { text: "Inspire the team with bold vision and lead from the front.", house: "gryffindor" },
           { text: "Design an optimal strategy before assigning roles.", house: "ravenclaw" },
@@ -364,10 +419,10 @@
       {
         text: "The Sorting Hat pauses on your head... What do you whisper?",
         options: [
-          { text: "“Put me where I can make a difference — no matter the danger.”", house: "gryffindor" },
-          { text: "“Let me learn, grow, and understand the deepest magic.”", house: "ravenclaw" },
-          { text: "“Where I can help, heal, and belong.”", house: "hufflepuff" },
-          { text: "“Where I will thrive, achieve greatness, and lead.”", house: "slytherin" }
+          { text: ""Put me where I can make a difference — no matter the danger."", house: "gryffindor" },
+          { text: ""Let me learn, grow, and understand the deepest magic."", house: "ravenclaw" },
+          { text: ""Where I can help, heal, and belong."", house: "hufflepuff" },
+          { text: ""Where I will thrive, achieve greatness, and lead."", house: "slytherin" }
         ]
       }
     ];
@@ -377,7 +432,7 @@
         name: "GRYFFINDOR",
         color: "#8B0000",
         traits: ["Bravery", "Courage", "Boldness", "Chivalry", "Daring"],
-        speech: `"Ah! A heart that races at danger, not from fear — but from the thrill of doing what’s right!  
+        speech: `"Ah! A heart that races at danger, not from fear — but from the thrill of doing what's right!  
                  Yes… yes… better be <strong>GRYFFINDOR!</strong>"`,
         fact: "🔥 Gryffindor values courage above all. Their common room is guarded by the Fat Lady — and accessible only with the right password."
       },
@@ -386,7 +441,7 @@
         color: "#0F52BA",
         traits: ["Wisdom", "Wit", "Intelligence", "Creativity", "Curiosity"],
         speech: `"Oho! A keen mind, always questioning, always reaching for truth...  
-                 Wit beyond measure is man’s greatest treasure!  
+                 Wit beyond measure is man's greatest treasure!  
                  <strong>RAVENCLAW!</strong>"`,
         fact: "🦉 To enter the Ravenclaw Tower, you must answer a riddle — no password, only wisdom."
       },
@@ -404,7 +459,7 @@
         color: "#1A5B2E",
         traits: ["Ambition", "Cunning", "Resourcefulness", "Leadership", "Determination"],
         speech: `"Oh-ho! A fire in your eyes — not for glory, but for greatness.  
-                 You’ll do what must be done.  
+                 You'll do what must be done.  
                  Yes… <strong>SLYTHERIN!</strong>"`,
         fact: "💎 Slytherin produced many great witches and wizards — including Merlin and Severus Snape."
       }
