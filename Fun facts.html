@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +19,39 @@
       line-height: 1.6;
       min-height: 100vh;
       padding: 20px;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-button {
+      background: rgba(212, 175, 55, 0.2);
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-family: 'Times New Roman', serif;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-button:hover {
+      background: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
     }
 
     .container {
@@ -125,6 +157,17 @@
     }
 
     @media (max-width: 650px) {
+      .navbar {
+        top: 10px;
+        right: 10px;
+        gap: 8px;
+      }
+
+      .nav-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+
       h1 { font-size: 2.5rem; }
       .facts-grid { grid-template-columns: 1fr; }
       .section-title { font-size: 1.8rem; }
@@ -132,14 +175,24 @@
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="about.html" class="nav-button">About</a>
+    <a href="Sorting.html" class="nav-button">Sorting Ceremony</a>
+    <a href="classes.html" class="nav-button">Classes</a>
+    <a href="quidditch.html" class="nav-button">Quidditch</a>
+    <a href="quidditch game.html" class="nav-button">Quidditch Game</a>
+    <a href="Fun facts.html" class="nav-button">Fun Facts</a>
+  </div>
+
   <div class="container">
     <header>
       <h1>✨ WIZARDING WORLD TRIVIA</h1>
-      <p class="subtitle">“The truth.” “It is a beautiful and terrible thing…” — Dumbledore & Harry</p>
+      <p class="subtitle">"The truth." "It is a beautiful and terrible thing…" — Dumbledore & Harry</p>
     </header>
 
     <div class="intro">
-      <p>Step beyond the books and films — here are <strong>30+ verified fun facts</strong> from J.K. Rowling’s notes, Pottermore, and interviews.  
+      <p>Step beyond the books and films — here are <strong>30+ verified fun facts</strong> from J.K. Rowling's notes, Pottermore, and interviews.  
       Some are whimsical, some surprising, all utterly <em>magical</em>.</p>
     </div>
 
@@ -152,7 +205,7 @@
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🕒 Moving Staircases</h3>
-          <p class="fact-text">The staircases don’t just move — they <em>rotate</em>, <em>vanish</em>, and even <em>sulk</em>. First-years are often late because of them.</p>
+          <p class="fact-text">The staircases don't just move — they <em>rotate</em>, <em>vanish</em>, and even <em>sulk</em>. First-years are often late because of them.</p>
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🚪 7th-Floor Secret</h3>
@@ -160,7 +213,7 @@
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🪞 One Mirror</h3>
-          <p class="fact-text">The Mirror of Erised shows “the deepest, most desperate desire of our hearts.” Its name? <em>Erised</em> = <span class="highlight">“desire”</span> backwards.</p>
+          <p class="fact-text">The Mirror of Erised shows "the deepest, most desperate desire of our hearts." Its name? <em>Erised</em> = <span class="highlight">"desire"</span> backwards.</p>
         </div>
       </div>
     </div>
@@ -174,7 +227,7 @@
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🕯️ Lumos Origin</h3>
-          <p class="fact-text">“<em>Lumos</em>” comes from Latin <span class="highlight">“lumen”</span> (light). “<em>Nox</em>” (to extinguish) means <span class="highlight">“night”</span> in Latin.</p>
+          <p class="fact-text">"<em>Lumos</em>" comes from Latin <span class="highlight">"lumen"</span> (light). "<em>Nox</em>" (to extinguish) means <span class="highlight">"night"</span> in Latin.</p>
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🧪 True Love Potion?</h3>
@@ -182,7 +235,7 @@
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🧩 Wand Loyalty</h3>
-          <p class="fact-text">A wand’s allegiance shifts when its owner is <em>disarmed, stunned, or overpowered</em> — not necessarily killed. Expelliarmus is enough!</p>
+          <p class="fact-text">A wand's allegiance shifts when its owner is <em>disarmed, stunned, or overpowered</em> — not necessarily killed. Expelliarmus is enough!</p>
         </div>
       </div>
     </div>
@@ -192,7 +245,7 @@
       <div class="facts-grid">
         <div class="fact-card">
           <h3 class="fact-title">🦉 Owl Post</h3>
-          <p class="fact-text">Owls find recipients <em>by name alone</em> — even if they’ve never met them. No address needed. (Muggles just think it’s “odd postal service.”)</p>
+          <p class="fact-text">Owls find recipients <em>by name alone</em> — even if they've never met them. No address needed. (Muggles just think it's "odd postal service.")</p>
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🐉 Dragon Blood Uses</h3>
@@ -200,11 +253,11 @@
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🦄 Unicorn Tears</h3>
-          <p class="fact-text">Drinking unicorn blood keeps you alive — but cursed to a “half-life,” filled with pain. Voldemort used it to sustain himself in 1997.</p>
+          <p class="fact-text">Drinking unicorn blood keeps you alive — but cursed to a "half-life," filled with pain. Voldemort used it to sustain himself in 1997.</p>
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🐀 Rat Lifespan</h3>
-          <p class="fact-text">Ordinary rats live 2–3 years. Scabbers (Peter Pettigrew) was <span class="number">12 years old</span> — a clue he wasn’t a real rat!</p>
+          <p class="fact-text">Ordinary rats live 2–3 years. Scabbers (Peter Pettigrew) was <span class="number">12 years old</span> — a clue he wasn't a real rat!</p>
         </div>
       </div>
     </div>
@@ -213,20 +266,20 @@
       <h2 class="section-title">🧙 Characters & Lore</h2>
       <div class="facts-grid">
         <div class="fact-card">
-          <h3 class="fact-title">⚡ Harry’s Scar</h3>
-          <p class="fact-text">The lightning bolt scar is the *only* wound Voldemort ever failed to kill with — making Harry the “Boy Who Lived.”</p>
+          <h3 class="fact-title">⚡ Harry's Scar</h3>
+          <p class="fact-text">The lightning bolt scar is the *only* wound Voldemort ever failed to kill with — making Harry the "Boy Who Lived."</p>
         </div>
         <div class="fact-card">
-          <h3 class="fact-title">📜 Tom Riddle’s Name</h3>
-          <p class="fact-text">“<em>Tom Marvolo Riddle</em>” anagrams to <span class="highlight">“I am Lord Voldemort”</span> — in English. (French and other translations were rewritten to preserve this!)</p>
+          <h3 class="fact-title">📜 Tom Riddle's Name</h3>
+          <p class="fact-text">"<em>Tom Marvolo Riddle</em>" anagrams to <span class="highlight">"I am Lord Voldemort"</span> — in English. (French and other translations were rewritten to preserve this!)</p>
         </div>
         <div class="fact-card">
-          <h3 class="fact-title">🦉 Hedwig’s Fate</h3>
-          <p class="fact-text">Hedwig’s death in *Deathly Hallows* symbolizes the end of Harry’s childhood — a deliberate, heartbreaking choice by J.K. Rowling.</p>
+          <h3 class="fact-title">🦉 Hedwig's Fate</h3>
+          <p class="fact-text">Hedwig's death in *Deathly Hallows* symbolizes the end of Harry's childhood — a deliberate, heartbreaking choice by J.K. Rowling.</p>
         </div>
         <div class="fact-card">
-          <h3 class="fact-title">🔍 Dumbledore’s Boggart</h3>
-          <p class="fact-text">J.K. Rowling confirmed: Dumbledore’s Boggart takes the form of <span class="highlight">the corpse of his sister, Ariana</span>.</p>
+          <h3 class="fact-title">🔍 Dumbledore's Boggart</h3>
+          <p class="fact-text">J.K. Rowling confirmed: Dumbledore's Boggart takes the form of <span class="highlight">the corpse of his sister, Ariana</span>.</p>
         </div>
       </div>
     </div>
@@ -236,7 +289,7 @@
       <div class="facts-grid">
         <div class="fact-card">
           <h3 class="fact-title">🚂 Platform 9¾</h3>
-          <p class="fact-text">The number 9¾ was chosen because it’s “between the ordinary and the magical.” Real King’s Cross has Platforms 9 and 10 — but the gap is a wall!</p>
+          <p class="fact-text">The number 9¾ was chosen because it's "between the ordinary and the magical." Real King's Cross has Platforms 9 and 10 — but the gap is a wall!</p>
         </div>
         <div class="fact-card">
           <h3 class="fact-title">📦 Gringotts Vaults</h3>
@@ -248,7 +301,7 @@
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🕰️ Time-Turner Limit</h3>
-          <p class="fact-text">Using a Time-Turner for more than <span class="number">5 hours</span> risks “catastrophic harm” — madness, disappearance, or becoming trapped in time.</p>
+          <p class="fact-text">Using a Time-Turner for more than <span class="number">5 hours</span> risks "catastrophic harm" — madness, disappearance, or becoming trapped in time.</p>
         </div>
       </div>
     </div>
@@ -258,26 +311,26 @@
       <div class="facts-grid">
         <div class="fact-card">
           <h3 class="fact-title">🎨 Hogwarts Paintings</h3>
-          <p class="fact-text">Portraits at Hogwarts are sentient — but only if the subject *willingly* gave a memory imprint before death. (Hence, Dumbledore’s portrait could advise.)</p>
+          <p class="fact-text">Portraits at Hogwarts are sentient — but only if the subject *willingly* gave a memory imprint before death. (Hence, Dumbledore's portrait could advise.)</p>
         </div>
         <div class="fact-card">
-          <h3 class="fact-title">📜 The Marauder’s Map</h3>
+          <h3 class="fact-title">📜 The Marauder's Map</h3>
           <p class="fact-text">It was created over <span class="number">3 years</span> by James, Sirius, Remus, and Peter — using the Homonculous Charm and secret passages they discovered.</p>
         </div>
         <div class="fact-card">
           <h3 class="fact-title">🦉 Patronus Uniqueness</h3>
-          <p class="fact-text">A Patronus reflects your *innermost self* — and can change with profound emotional shifts. (e.g., Tonks’ changed when she fell in love with Lupin.)</p>
+          <p class="fact-text">A Patronus reflects your *innermost self* — and can change with profound emotional shifts. (e.g., Tonks' changed when she fell in love with Lupin.)</p>
         </div>
         <div class="fact-card">
           <h3 class="fact-title">📜 Last Sentence</h3>
           <p class="fact-text">The final line of the entire series:  
-          <span class="highlight">“The scar had not pained Harry for nineteen years. All was well.”</span></p>
+          <span class="highlight">"The scar had not pained Harry for nineteen years. All was well."</span></p>
         </div>
       </div>
     </div>
 
     <div style="text-align: center; margin: 30px 0; font-style: italic; color: #d4af37;">
-      “Numbing the pain for a while will make it worse when you finally feel it.” — Albus Dumbledore
+      "Numbing the pain for a while will make it worse when you finally feel it." — Albus Dumbledore
     </div>
 
     <footer>
