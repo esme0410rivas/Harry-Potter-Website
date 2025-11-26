@@ -21,6 +21,39 @@
       padding: 20px;
     }
 
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-button {
+      background: rgba(212, 175, 55, 0.2);
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-family: 'Times New Roman', serif;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-button:hover {
+      background: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+
     .container {
       max-width: 900px;
       margin: 0 auto;
@@ -130,6 +163,17 @@
     }
 
     @media (max-width: 650px) {
+      .navbar {
+        top: 10px;
+        right: 10px;
+        gap: 8px;
+      }
+
+      .nav-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+
       h1 { font-size: 2.5rem; }
       .classes-grid { grid-template-columns: 1fr; }
       .class-title { font-size: 1.6rem; }
@@ -137,10 +181,21 @@
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="index.html" class="nav-button">Home</a>
+    <a href="about.html" class="nav-button">About</a>
+    <a href="Sorting.html" class="nav-button">Sorting Ceremony</a>
+    <a href="classes.html" class="nav-button">Classes</a>
+    <a href="quidditch.html" class="nav-button">Quidditch</a>
+    <a href="quidditch game.html" class="nav-button">Quidditch Game</a>
+    <a href="Fun facts.html" class="nav-button">Fun Facts</a>
+  </div>
+
   <div class="container">
     <header>
       <h1>📚 HOGWARTS COURSE CATALOGUE</h1>
-      <p class="subtitle">"Wit beyond measure is man’s greatest treasure." — Rowena Ravenclaw</p>
+      <p class="subtitle">"Wit beyond measure is man's greatest treasure." — Rowena Ravenclaw</p>
     </header>
 
     <div class="intro">
@@ -198,7 +253,7 @@
         <h2 class="class-title">🌿 Herbology</h2>
         <div class="class-details">
           <p>Study of magical plants and fungi — their care, properties, and uses in potions and healing.</p>
-          <p><strong>Key Plants:</strong> Mandrakes, Venomous Tentacula, Devil’s Snare, Gillyweed.</p>
+          <p><strong>Key Plants:</strong> Mandrakes, Venomous Tentacula, Devil's Snare, Gillyweed.</p>
           <p><span class="professor">Professor:</span> Pomona Sprout (Head of Hufflepuff)</p>
           <p class="fun-fact">✨ Mandrake cries can be fatal — earmuffs are mandatory during repotting!</p>
         </div>
@@ -222,7 +277,7 @@
           <p>Study of stars, planets, and celestial events — and their magical significance.</p>
           <p><strong>Activities:</strong> Midnight observations, star charting, lunar phase tracking.</p>
           <p><span class="professor">Professor:</span> Aurora Sinistra</p>
-          <p class="fun-fact">✨ Exams are held at midnight — don’t forget your telescope and warm robes!</p>
+          <p class="fun-fact">✨ Exams are held at midnight — don't forget your telescope and warm robes!</p>
         </div>
       </div>
 
@@ -233,14 +288,14 @@
           <p>Introduction to broomstick flight — mounting, hovering, directional control, and safety.</p>
           <p><strong>Key Skill:</strong> "Up!" command, emergency dismounts, basic manoeuvres.</p>
           <p><span class="professor">Instructor:</span> Madam Rolanda Hooch</p>
-          <p class="fun-fact">✨ Neville’s first broom famously knocked him out — but later, he became a skilled flyer!</p>
+          <p class="fun-fact">✨ Neville's first broom famously knocked him out — but later, he became a skilled flyer!</p>
         </div>
       </div>
     </div>
 
     <div class="note">
       <p>🎓 <strong>Third-Year Electives include:</strong> Arithmancy, Ancient Runes, Care of Magical Creatures, Divination, and Muggle Studies.<br>
-      🪄 <em>“The world is full of common objects enchanted in extraordinary ways…” — Miranda Goshawk, <u>The Standard Book of Spells</u></em></p>
+      🪄 <em>"The world is full of common objects enchanted in extraordinary ways…" — Miranda Goshawk, <u>The Standard Book of Spells</u></em></p>
     </div>
 
     <footer>
